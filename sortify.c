@@ -44,12 +44,14 @@ int main(int argc, char **argv)
 		if (user_input == '\n')
 			continue;
 
+		// Check for input buffer, count size
 		int c;
 		while ((c = getchar()) != '\n' && c != EOF)
 		{
 			input_count++;
 		}
 
+		// If user fails to input only one char that's an unknown command
 		if (input_count > 0)
 		{
 			puts(MSG_UNKNOWN);
