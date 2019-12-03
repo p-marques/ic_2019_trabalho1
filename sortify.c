@@ -35,7 +35,7 @@ int main(int argc, char **argv)
 
 	puts(MSG_WELCOME);
 
-	// Handle Arguments
+	// Handle arguments
 	if (argc == 2)
 		srand(atoi(argv[1]));
 	else if (argc == 3 && atoi(argv[2]) > 3)
@@ -85,7 +85,7 @@ int main(int argc, char **argv)
 	return 0;
 }
 
-// Cleans Input Buffer and Returns Size
+// Cleans input buffer and eeturns size
 int clean_input_buffer()
 {
 	short int c;
@@ -99,8 +99,25 @@ int clean_input_buffer()
 	return input_count;
 }
 
-/* Handle Player Input
-Returns player's success */
+// Update player score based on time taken to give correct answer
+void update_player_score(unsigned short int * current_points, unsigned short int time_elapsed)
+{
+	unsigned short int factor;
+
+	if (time_elapsed > 15)
+		factor = 1;
+	else if (time_elapsed > 10)
+		factor = 15 - time_elapsed;
+	else if (time_elapsed < 4)
+		factor = 10;
+	else
+		factor = 10 - time_elapsed;
+
+	*current_points = *current_points + factor;
+}
+
+/* Handle player input
+returns player's success */
 bool handle_player_input(short int * numbers, short int * player_numbers)
 {
 	unsigned short int i;
@@ -119,7 +136,6 @@ bool handle_player_input(short int * numbers, short int * player_numbers)
 			return false;
 		}
 	}
-
 
 	return true;
 }
@@ -165,6 +181,7 @@ void play(unsigned short int n_size, unsigned short int * level, unsigned short 
 {
 	short int current_generated_numbers[n_size], current_player_numbers[n_size];
 	bool player_success, player_wins = false;
+	time_t start_time, time_elapsed;
 
 	// + 1 Round
 	*current_round = *current_round + 1;
@@ -173,12 +190,21 @@ void play(unsigned short int n_size, unsigned short int * level, unsigned short 
 
 	order_numbers(n_size, current_generated_numbers);
 
+	// Save current time
+	start_time = time(NULL);
 	player_success = handle_player_input(current_generated_numbers, current_player_numbers);
+
 	if (player_success)
 	{
+		// Time until player got it right in seconds
+		time_elapsed = (unsigned short int) time(NULL) - start_time;
+
 		puts(MSG_WELL);
-		*current_points = *current_points + 5;
-		if (*current_points == level_threshold[*level])
+
+		// Update player score based on time to give correct answer
+		update_player_score(current_points, time_elapsed);
+
+		if (*current_points >= level_threshold[*level])
 		{
 			if (*level == 4)
 				player_wins = true;
