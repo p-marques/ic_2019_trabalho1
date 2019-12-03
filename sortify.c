@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include <math.h>
+#include <time.h>
 
 #define MSG_WELCOME "WELCOME TO SORTIFY!"
 #define MSG_SORT "Sort the following numbers:"
@@ -18,11 +20,64 @@ int rand_number(const int, const int);
 void print_status(const int, const int, const int);
 void print_menu(void);
 
-
 int main(int argc, char **argv)
 {
+	char user_input;
+	unsigned short int input_count, level = 0, current_round = 0, current_points = 0;
+	bool active = true;
 
 	puts(MSG_WELCOME);
+
+	// Handle Arguments
+	if (argc == 1)
+		srand(time(NULL));
+	else
+		srand(atoi(argv[1]));
+
+	print_menu();
+	while (active)
+	{
+		input_count = 0;
+
+		scanf("%c", &user_input);
+
+		if (user_input == '\n')
+			continue;
+
+		int c;
+		while ((c = getchar()) != '\n' && c != EOF)
+		{
+			input_count++;
+		}
+
+		if (input_count > 0)
+		{
+			puts(MSG_UNKNOWN);
+			continue;
+		}
+
+		switch (user_input)
+		{
+			case 'q':
+				puts(MSG_BYE);
+				active = false;
+				break;
+
+			case 'm':
+				print_menu();
+				break;
+
+			case 's':
+				print_status(level + 1, current_points, current_round);
+				break;
+
+			case 'p':
+				break;
+
+			default:
+				puts(MSG_UNKNOWN);
+		}
+	}
 
 	return 0;
 }
