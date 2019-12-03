@@ -16,6 +16,10 @@
 #define MSG_UNKNOWN "Unknown option."
 /* Use puts() to print constant strings */
 
+//// EXTRA
+#define N_SIZE 4 // Affects the number of numbers that the player has to order. Default is 4.
+
+void play(unsigned short int *, unsigned short int *, unsigned short int *, unsigned short int *, short int *, short int *);
 int rand_number(const int, const int);
 void print_status(const int, const int, const int);
 void print_menu(void);
@@ -23,7 +27,8 @@ void print_menu(void);
 int main(int argc, char **argv)
 {
 	char user_input;
-	unsigned short int input_count, level = 0, current_round = 0, current_points = 0;
+	unsigned short int input_count, level = 0, current_round = 0, current_points = 0, level_threshold[5] = {10, 20, 30, 40, 50};
+	short int min_values[5] = {0, 0, -50, -100, -200}, max_values[5] = {10, 30, 30, 0, -100};
 	bool active = true;
 
 	puts(MSG_WELCOME);
@@ -74,6 +79,7 @@ int main(int argc, char **argv)
 				break;
 
 			case 'p':
+				play(&level, &current_round, &current_points, level_threshold, min_values, max_values);
 				break;
 
 			default:
@@ -82,6 +88,30 @@ int main(int argc, char **argv)
 	}
 
 	return 0;
+}
+
+// Generated the random numbers and displays them
+void generate_numbers_and_display(unsigned short int * level, short int * min_values, short int * max_values, short int * numbers)
+{
+	puts(MSG_SORT);
+	for (unsigned short i = 0; i < N_SIZE; i++)
+	{
+		*(numbers + i) = rand_number(*(min_values + *level), *(max_values + *level));
+		printf("%d", *(numbers + i));
+		if (i < N_SIZE - 1)
+			printf(", ");
+		else
+			printf("\n");
+	}
+}
+
+void play(unsigned short int * level, unsigned short int * current_round,
+					unsigned short int * current_points, unsigned short int * level_threshold, short int * min_values, short int * max_values)
+{
+	short int current_generated_numbers[N_SIZE], current_player_numbers[N_SIZE];
+
+	*current_round = *current_round + 1;
+	generate_numbers_and_display(level, min_values, max_values, current_generated_numbers);
 }
 
 /* generate a random integer between min and max */
