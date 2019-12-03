@@ -90,6 +90,27 @@ int main(int argc, char **argv)
 	return 0;
 }
 
+// Orders numbers
+void order_numbers(short int * numbers)
+{
+	unsigned short int i, j;
+	short int t;
+
+	for (i = 0; i < N_SIZE; i++)
+	{
+		for (j = 0; j < N_SIZE; j++)
+		{
+			if (*(numbers + i) < *(numbers + j))
+			{
+				t = *(numbers + j);
+				*(numbers + j) = *(numbers + i);
+				*(numbers + i) = t;
+			}
+		}
+	}
+
+}
+
 // Generated the random numbers and displays them
 void generate_numbers_and_display(unsigned short int * level, short int * min_values, short int * max_values, short int * numbers)
 {
@@ -110,8 +131,12 @@ void play(unsigned short int * level, unsigned short int * current_round,
 {
 	short int current_generated_numbers[N_SIZE], current_player_numbers[N_SIZE];
 
+	// + 1 Round
 	*current_round = *current_round + 1;
+
 	generate_numbers_and_display(level, min_values, max_values, current_generated_numbers);
+
+	order_numbers(current_generated_numbers);
 }
 
 /* generate a random integer between min and max */
