@@ -20,7 +20,7 @@
 //// EXTRA
 #define N_SIZE 4 // Affects the number of numbers that the player has to order. Default is 4.
 
-void play(unsigned short int, unsigned short int *, unsigned short int *, unsigned short int *, unsigned short int *, short int *, short int *);
+void play(unsigned short, unsigned short *, unsigned short *, unsigned short *, unsigned short *, short *, short *);
 int clean_input_buffer();
 int rand_number(const int, const int);
 void print_status(const int, const int, const int);
@@ -29,8 +29,8 @@ void print_menu(void);
 int main(int argc, char **argv)
 {
 	char user_input;
-	unsigned short int n_size = N_SIZE, level = 0, current_round = 0, current_points = 0, level_threshold[5] = {10, 20, 30, 40, 50};
-	short int min_values[5] = {0, 0, -50, -100, -200}, max_values[5] = {10, 30, 30, 0, -100};
+	unsigned short n_size = N_SIZE, level = 0, current_round = 0, current_points = 0, level_threshold[5] = {10, 20, 30, 40, 50};
+	short min_values[5] = {0, 0, -50, -100, -200}, max_values[5] = {10, 30, 30, 0, -100};
 	bool active = true;
 
 	puts(MSG_WELCOME);
@@ -88,8 +88,8 @@ int main(int argc, char **argv)
 // Cleans input buffer and returns size
 int clean_input_buffer()
 {
-	short int c;
-	unsigned short int input_count = 0;
+	short c;
+	unsigned short input_count = 0;
 
 	while ((c = getchar()) != '\n' && c != EOF)
 	{
@@ -100,9 +100,9 @@ int clean_input_buffer()
 }
 
 // Update player score based on time taken to give correct answer
-void update_player_score(unsigned short int * current_points, unsigned short int time_elapsed)
+void update_player_score(unsigned short * current_points, unsigned short time_elapsed)
 {
-	unsigned short int factor;
+	unsigned short factor;
 
 	if (time_elapsed > 15)
 		factor = 1;
@@ -130,33 +130,34 @@ int count_occurences(short n_size, short * array, int value)
 	return counter;
 }
 
-/*
-Counts how many times inputed number at
-*/
-bool is_input_valid(short int n_size, short int * numbers, short int * player_numbers)
+// Compares input to generated numbers.
+// If array elements don't match (order irrelevant here) return false.
+bool is_input_valid(short n_size, short * numbers, short * player_numbers)
 {
-	unsigned short int i, occurences_numbers = 0, occurences_player_numbers = 0;
+	unsigned short i, occurences_numbers = 0, occurences_player_numbers = 0;
 	
 	for (i = 0; i < n_size; i++)
 	{
+		occurences_numbers = 0, occurences_player_numbers = 0;
+
 		// Get occurences of input in generated numbers
 		occurences_numbers = count_occurences(n_size, numbers, *(player_numbers + i));
 
 		// Get occurences of input in player numbers
 		occurences_player_numbers = count_occurences(n_size, player_numbers, *(player_numbers + i));
+
+		if (occurences_numbers != occurences_player_numbers)
+			return false;
 	}
-	
-	if (occurences_numbers == occurences_player_numbers)
-		return true;
-	
-	return false;
+
+	return true;
 }
 
 /* Handle player input
 returns player's success */
-bool handle_player_input(short int n_size, short int * numbers, short int * player_numbers)
+bool handle_player_input(short n_size, short * numbers, short * player_numbers)
 {
-	unsigned short int i, input_counter;
+	unsigned short i, input_counter;
 	bool valid_input = false, clean_run = true;
 
 	while (!valid_input)
@@ -196,10 +197,10 @@ bool handle_player_input(short int n_size, short int * numbers, short int * play
 }
 
 // Orders numbers
-void order_numbers(unsigned short int n_size, short int * numbers)
+void order_numbers(unsigned short n_size, short * numbers)
 {
-	unsigned short int i, j;
-	short int t;
+	unsigned short i, j;
+	short t;
 
 	for (i = 0; i < n_size; i++)
 	{
@@ -217,7 +218,7 @@ void order_numbers(unsigned short int n_size, short int * numbers)
 }
 
 // Generated the random numbers and displays them
-void generate_numbers_and_display(unsigned short int n_size, unsigned short int * level, short int * min_values, short int * max_values, short int * numbers)
+void generate_numbers_and_display(unsigned short n_size, unsigned short * level, short * min_values, short * max_values, short * numbers)
 {
 	puts(MSG_SORT);
 	for (unsigned short i = 0; i < n_size; i++)
@@ -231,10 +232,10 @@ void generate_numbers_and_display(unsigned short int n_size, unsigned short int 
 	}
 }
 
-void play(unsigned short int n_size, unsigned short int * level, unsigned short int * current_round,
-					unsigned short int * current_points, unsigned short int * level_threshold, short int * min_values, short int * max_values)
+void play(unsigned short n_size, unsigned short * level, unsigned short * current_round,
+					unsigned short * current_points, unsigned short * level_threshold, short * min_values, short * max_values)
 {
-	short int current_generated_numbers[n_size], current_player_numbers[n_size];
+	short current_generated_numbers[n_size], current_player_numbers[n_size];
 	bool player_success, player_wins = false;
 	time_t start_time, time_elapsed;
 
@@ -252,7 +253,7 @@ void play(unsigned short int n_size, unsigned short int * level, unsigned short 
 	if (player_success)
 	{
 		// Time until player got it right in seconds
-		time_elapsed = (unsigned short int) time(NULL) - start_time;
+		time_elapsed = (unsigned short) time(NULL) - start_time;
 
 		puts(MSG_WELL);
 
