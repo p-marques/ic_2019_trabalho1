@@ -9,7 +9,7 @@ Nome : [placeholder]
 Autores
 * Pedro Marques - 21900800
 * Miguel Feliciano - [placeholder]
-* Nélson Milheiro - [placeholder]
+* Nélson Milheiro - 21904365
 
 ## Descrição da Solução
 blah blah blah
