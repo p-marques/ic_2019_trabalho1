@@ -4,12 +4,12 @@
 #### 1º Semestre - 2019/2020
 
 ## Grupo
-Nome : [placeholder]
+Nome : Doesn't Matter
 
 Autores
 * Pedro Marques - 21900800
-* Miguel Feliciano - [placeholder]
-* Nélson Milheiro - 21904365
+* Miguel Feliciano - 21904365
+* Nelson Milheiro - 21904365
 
 ## Descrição da Solução
 blah blah blah

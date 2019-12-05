@@ -85,7 +85,7 @@ int main(int argc, char **argv)
 	return 0;
 }
 
-// Cleans input buffer and eeturns size
+// Cleans input buffer and returns size
 int clean_input_buffer()
 {
 	short int c;
@@ -116,20 +116,75 @@ void update_player_score(unsigned short int * current_points, unsigned short int
 	*current_points = *current_points + factor;
 }
 
-/* Handle player input
-returns player's success */
-bool handle_player_input(short int * numbers, short int * player_numbers)
+// Counts occurences of a number in an array
+int count_occurences(short n_size, short * array, int value)
 {
-	unsigned short int i;
+	unsigned short counter = 0;
 
-	for (i = 0; i < N_SIZE; i++)
+	for (unsigned short i = 0; i < n_size; i++)
 	{
-		scanf("%hi", &player_numbers[i]);
+		if (*(array + i) == value)
+			counter++;
 	}
 
-	clean_input_buffer();
+	return counter;
+}
 
-	for (i = 0; i < N_SIZE; i++)
+/*
+Counts how many times inputed number at
+*/
+bool is_input_valid(short int n_size, short int * numbers, short int * player_numbers)
+{
+	unsigned short int i, occurences_numbers = 0, occurences_player_numbers = 0;
+	
+	for (i = 0; i < n_size; i++)
+	{
+		// Get occurences of input in generated numbers
+		occurences_numbers = count_occurences(n_size, numbers, *(player_numbers + i));
+
+		// Get occurences of input in player numbers
+		occurences_player_numbers = count_occurences(n_size, player_numbers, *(player_numbers + i));
+	}
+	
+	if (occurences_numbers == occurences_player_numbers)
+		return true;
+	
+	return false;
+}
+
+/* Handle player input
+returns player's success */
+bool handle_player_input(short int n_size, short int * numbers, short int * player_numbers)
+{
+	unsigned short int i, input_counter;
+	bool valid_input = false, clean_run = true;
+
+	while (!valid_input)
+	{
+		if (!clean_run)
+			puts(MSG_SORT2);
+
+		valid_input = true;
+
+		for (i = 0; i < n_size; i++)
+		{
+			scanf("%hi", &player_numbers[i]);
+		}
+
+		// Handles input of anything other than numbers
+		input_counter = clean_input_buffer();
+		if (input_counter > 0)
+		{
+			valid_input = false;
+			clean_run = false;
+			continue;
+		}
+
+		valid_input = is_input_valid(n_size, numbers, player_numbers);
+		clean_run = false;
+	}
+
+	for (i = 0; i < n_size; i++)
 	{
 		if (*(player_numbers + i) != *(numbers + i))
 		{
@@ -192,7 +247,7 @@ void play(unsigned short int n_size, unsigned short int * level, unsigned short 
 
 	// Save current time
 	start_time = time(NULL);
-	player_success = handle_player_input(current_generated_numbers, current_player_numbers);
+	player_success = handle_player_input(n_size, current_generated_numbers, current_player_numbers);
 
 	if (player_success)
 	{
