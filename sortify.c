@@ -30,18 +30,22 @@ int main(int argc, char **argv)
 {
 	char user_input;
 	unsigned short n_size = N_SIZE, level = 0, current_round = 0, current_points = 0, level_threshold[5] = {10, 20, 30, 40, 50};
-	short min_values[5] = {0, 0, -50, -100, -200}, max_values[5] = {10, 30, 30, 0, -100};
+	short i, min_values[5] = {0, 0, -50, -100, -200}, max_values[5] = {10, 30, 30, 0, -100};
 	bool active = true;
 
 	puts(MSG_WELCOME);
 
 	// Handle arguments
-	if (argc == 2)
-		srand(atoi(argv[1]));
-	else if (argc == 3 && atoi(argv[2]) > 3)
-		n_size = atoi(argv[2]);
-	else
+	// Sets n_size if given
+	if (argc == 1)
 		srand(time(NULL));
+	else
+	{
+		srand(atoi(argv[1]));
+
+		if (argc > 2)
+			n_size = (i = atoi(argv[2])) > 4 ? i : N_SIZE;
+	}
 
 	print_menu();
 	while (active)
