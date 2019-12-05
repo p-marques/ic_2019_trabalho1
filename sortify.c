@@ -4,6 +4,8 @@
 #include <math.h>
 #include <time.h>
 
+//hello
+
 #define MSG_WELCOME "WELCOME TO SORTIFY!"
 #define MSG_SORT "Sort the following numbers:"
 #define MSG_SORT2 "Please sort the numbers"
