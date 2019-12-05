@@ -56,11 +56,11 @@ int main(int argc, char **argv)
 			continue;
 
 		// If user fails to input only one char that's an unknown command
-		if (clean_input_buffer() > 0)
-		{
-			puts(MSG_UNKNOWN);
-			continue;
-		}
+		// if (clean_input_buffer() > 0)
+		// {
+		// 	puts(MSG_UNKNOWN);
+		// 	continue;
+		// }
 
 		switch (user_input)
 		{
