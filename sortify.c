@@ -117,7 +117,7 @@ void update_player_score(unsigned short * current_points, unsigned short time_el
 }
 
 // Counts occurences of a number in an array
-int count_occurences(short n_size, short * array, int value)
+int count_occurences(unsigned short n_size, short * array, int value)
 {
 	unsigned short counter = 0;
 
@@ -132,7 +132,7 @@ int count_occurences(short n_size, short * array, int value)
 
 // Compares input to generated numbers.
 // If array elements don't match (order irrelevant here) return false.
-bool is_input_valid(short n_size, short * numbers, short * player_numbers)
+bool is_input_valid(unsigned short n_size, short * numbers, short * player_numbers)
 {
 	unsigned short i, occurences_numbers = 0, occurences_player_numbers = 0;
 	
@@ -155,7 +155,7 @@ bool is_input_valid(short n_size, short * numbers, short * player_numbers)
 
 /* Handle player input
 returns player's success */
-bool handle_player_input(short n_size, short * numbers, short * player_numbers)
+bool handle_player_input(unsigned short n_size, short * numbers, short * player_numbers)
 {
 	unsigned short i, input_counter;
 	bool valid_input = false, clean_run = true;
