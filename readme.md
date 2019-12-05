@@ -4,18 +4,29 @@
 #### 1º Semestre - 2019/2020
 
 ## Grupo
-Nome : [placeholder]
+Nome : Doesn't Matter
 
 Autores
 * Pedro Marques - 21900800
-* Miguel Feliciano - [placeholder]
-* Nélson Milheiro - 21904365
+* Miguel Feliciano - 21904115
+* Nelson Milheiro - 21904365
 
 ## Descrição da Solução
-blah blah blah
+
+O programa mostra o menu de opções que o jogador pode escolher quando é inicializado.
+
+Se o jogador carregar no p, o jogo começa normalmente, dando uma lista de números que o jogador tem que ordenar. Se conseguir, o jogador ganha pontos dependendo do tempo que demorou a ordenar, senão perde e tem que começar de novo. O jogo continua e fica progressivamente mais difícil, até o jogador conseguir chegar ao nível 6, que nesse caso o jogador ganha o jogo. Se o jogador responder com algum número ou letras que não estejam na lista dada, o programa pede para o jogador ordenar os números da lista dada.
+
+Se o jogador carregar no s, o programa mostra em que nível é que o jogador está, os pontos que o jogador tem atualmente e a ronda atual do jogador.
+
+Se o jogador carregar no m, o programa imprime o menu no ecrã outra vez.
+
+Se o jogador carregar no q, o programa fecha com a mensagem "Bye."
 
 ## Estrutura do Software
-blah blah blah blah
+
+game jams!
 
 ## Conclusões e Matéria Aprendida
-blah blah blah
+
+game jams!
