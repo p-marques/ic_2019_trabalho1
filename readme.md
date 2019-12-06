@@ -12,7 +12,6 @@ Autores
 * Nelson Milheiro - 21904365
 
 ## Descrição da Solução
-
 O programa mostra o menu de opções que o jogador pode escolher quando é inicializado.
 
 Se o jogador carregar no p, o jogo começa normalmente, dando uma lista de números que o jogador tem que ordenar. Se conseguir, o jogador ganha pontos dependendo do tempo que demorou a ordenar, senão perde e tem que começar de novo. O jogo continua e fica progressivamente mais difícil, até o jogador conseguir chegar ao nível 6, que nesse caso o jogador ganha o jogo. Se o jogador responder com algum número ou letras que não estejam na lista dada, o programa pede para o jogador ordenar os números da lista dada.
@@ -24,9 +23,10 @@ Se o jogador carregar no m, o programa imprime o menu no ecrã outra vez.
 Se o jogador carregar no q, o programa fecha com a mensagem "Bye."
 
 ## Estrutura do Software
+![alt text](C:/Users/a21904115/Downloads/mini-projeto-c.jpg)
 
-game jams!
 
 ## Conclusões e Matéria Aprendida
+Ao fazer este projeto aprendemos a utilizar de forma eficiente todos os conteudos que aprendemos nas aulas e mais. Aprendemos também como o código pode ser escrito de forma mais eficiente o que nos irá ajudar no futuro a desenvolver um código melhor. 
 
-game jams!
+Em conclusão, este exrcício serviu para compreendermos melhor a linguagem C e a adquirir vários conhecimentos útieis que certamente iremso utilizar em projetos futuros.
