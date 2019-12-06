@@ -23,7 +23,7 @@ Se o jogador carregar no m, o programa imprime o menu no ecrã outra vez.
 Se o jogador carregar no q, o programa fecha com a mensagem "Bye."
 
 ## Estrutura do Software
-![alt text](C:/Users/a21904115/Downloads/mini-projeto-c.jpg)
+![Imgur](https://i.imgur.com/oGSlvqB.png)
 
 
 ## Conclusões e Matéria Aprendida
