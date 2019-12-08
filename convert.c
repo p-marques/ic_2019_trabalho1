@@ -18,6 +18,7 @@
 /* Use puts() to print constant strings */
 
 //// EXTRA
+#define USE_TIME_FACTOR false // Flag for usage of time as a factor when giving player points. Default is false.
 #define N_SIZE 4 // Affects the number of numbers that the player has to order. Default is 4.
 
 int play(unsigned short, unsigned short *, unsigned short *, unsigned short *, unsigned short *, short *, short *);
@@ -55,6 +56,7 @@ int main(int argc, char **argv)
 		if (user_input == '\n')
 			continue;
 
+		// This is disabled because of Pandora tests
 		// If user fails to input only one char that's an unknown command
 		// if (clean_input_buffer() > 0)
 		// {
@@ -119,8 +121,9 @@ void update_player_score(unsigned short * current_points, unsigned short time_el
 	else
 		factor = 10 - time_elapsed;
 
-	// Time factor is off because of pandora tests. Comment line below to enable it
-	factor = 5;
+	// If not using time as factor, use default 5 points
+	if (!USE_TIME_FACTOR)
+		factor = 5;
 
 	*current_points = *current_points + factor;
 }
